@@ -1,5 +1,7 @@
 # Python — interview questions
 
+Questions are ordered from **easiest to hardest**.
+
 ## Table of contents
 
 - [1. When is Python a strong choice for a project, and when would you choose another language instead?](#1-when-is-python-a-strong-choice-for-a-project-and-when-would-you-choose-another-language-instead)
@@ -8,32 +10,34 @@
 - [4. What's the difference between `dict.get(key)` and `dict[key]`?](#4-whats-the-difference-between-dictgetkey-and-dictkey)
 - [5. What's a comprehension in Python ?](#5-whats-a-comprehension-in-python)
 - [6. What's the method `zip` for in Python ?](#6-whats-the-method-zip-for-in-python)
-- [7. What's `if __name__ == "__main__"` for ?](#7-whats-if-name-main-for)
+- [7. What is the standard library in Python ?](#7-what-is-the-standard-library-in-python)
 - [8. What's the difference between a module, a package and a library ?](#8-whats-the-difference-between-a-module-a-package-and-a-library)
-- [9. What is the standard library in Python ?](#9-what-is-the-standard-library-in-python)
-- [10. What is the difference between a shallow copy and a deep copy?](#10-what-is-the-difference-between-a-shallow-copy-and-a-deep-copy)
-- [11. What's the different types of attributes in a class ?](#11-whats-the-different-types-of-attributes-in-a-class)
-- [12. What's the difference between inheritance and composition ?](#12-whats-the-difference-between-inheritance-and-composition)
-- [13. When would you define a custom exception class?](#13-when-would-you-define-a-custom-exception-class)
-- [14. What is the difference between `else` and `finally` in a `try` statement?](#14-what-is-the-difference-between-else-and-finally-in-a-try-statement)
-- [15. How do you handle errors properly in Python code?](#15-how-do-you-handle-errors-properly-in-python-code)
-- [16. What is the difference between args and kwargs? Write a function that accepts both and prints them.](#16-what-is-the-difference-between-args-and-kwargs-write-a-function-that-accepts-both-and-prints-them)
-- [17. Explain the difference between @staticmethod and @classmethod. When would you use each?](#17-explain-the-difference-between-staticmethod-and-classmethod-when-would-you-use-each)
-- [18. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.](#18-what-is-a-python-generator-write-a-one-liner-generator-that-yields-squares-of-numbers-from-1-to-n)
-- [19. What's a fixture in Pytest ?](#19-whats-a-fixture-in-pytest)
-- [20. What's parametrization in Pytest ?](#20-whats-parametrization-in-pytest)
-- [21. What's the different between fixtures and parametrized test in Pytest ?](#21-whats-the-different-between-fixtures-and-parametrized-test-in-pytest)
-- [22. What's Pydantic ?](#22-whats-pydantic)
-- [23. What's a decorator in Python ?](#23-whats-a-decorator-in-python)
-- [24. How would you store and validate a JSON schema for API results in Python ?](#24-how-would-you-store-and-validate-a-json-schema-for-api-results-in-python)
-- [25. Explain Python's `asyncio`. How does `async/await` differ from threading?](#25-explain-pythons-asyncio-how-does-asyncawait-differ-from-threading)
-- [26. What is GIL in Python ?](#26-what-is-gil-in-python)
-- [27. How do you achieve true parallelism in Python despite the GIL ?](#27-how-do-you-achieve-true-parallelism-in-python-despite-the-gil)
-- [28. What does func(**some_dict) do in Python?](#28-what-does-funcsome-dict-do-in-python)
-- [29. What is the difference between iterator and iterable?](#29-what-is-the-difference-between-iterator-and-iterable)
-- [30. What are `__repr__` and `__str__`?](#30-what-are-repr-and-str)
-- [31. What are dataclasses?](#31-what-are-dataclasses)
-- [32. What are type hints used for? Are they enforced at runtime?](#32-what-are-type-hints-used-for-are-they-enforced-at-runtime)
+- [9. What's `if __name__ == "__main__"` for ?](#9-whats-if-name-main-for)
+- [10. How Python executes code ?](#10-how-python-executes-code)
+- [11. How Python manages memory ?](#11-how-python-manages-memory)
+- [12. What is the difference between a shallow copy and a deep copy?](#12-what-is-the-difference-between-a-shallow-copy-and-a-deep-copy)
+- [13. What is the difference between args and kwargs? Write a function that accepts both and prints them.](#13-what-is-the-difference-between-args-and-kwargs-write-a-function-that-accepts-both-and-prints-them)
+- [14. What does `**some_dict` do in Python?](#14-what-does-somedict-do-in-python)
+- [15. What is the difference between `else` and `finally` in a `try` statement?](#15-what-is-the-difference-between-else-and-finally-in-a-try-statement)
+- [16. How do you handle errors properly in Python code?](#16-how-do-you-handle-errors-properly-in-python-code)
+- [17. When would you define a custom exception class?](#17-when-would-you-define-a-custom-exception-class)
+- [18. What's the different types of attributes in a class ?](#18-whats-the-different-types-of-attributes-in-a-class)
+- [19. What's the difference between inheritance and composition ?](#19-whats-the-difference-between-inheritance-and-composition)
+- [20. Explain the difference between @staticmethod and @classmethod. When would you use each?](#20-explain-the-difference-between-staticmethod-and-classmethod-when-would-you-use-each)
+- [21. What are `__repr__` and `__str__`?](#21-what-are-repr-and-str)
+- [22. What's a decorator in Python ?](#22-whats-a-decorator-in-python)
+- [23. What are type hints used for? Are they enforced at runtime?](#23-what-are-type-hints-used-for-are-they-enforced-at-runtime)
+- [24. What are dataclasses?](#24-what-are-dataclasses)
+- [25. What is the difference between iterator and iterable?](#25-what-is-the-difference-between-iterator-and-iterable)
+- [26. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.](#26-what-is-a-python-generator-write-a-one-liner-generator-that-yields-squares-of-numbers-from-1-to-n)
+- [27. What's a fixture in Pytest ?](#27-whats-a-fixture-in-pytest)
+- [28. What's parametrization in Pytest ?](#28-whats-parametrization-in-pytest)
+- [29. What's the different between fixtures and parametrized test in Pytest ?](#29-whats-the-different-between-fixtures-and-parametrized-test-in-pytest)
+- [30. What's Pydantic ?](#30-whats-pydantic)
+- [31. How would you store and validate a JSON schema for API results in Python ?](#31-how-would-you-store-and-validate-a-json-schema-for-api-results-in-python)
+- [32. Explain Python's `asyncio`. How does `async/await` differ from threading?](#32-explain-pythons-asyncio-how-does-asyncawait-differ-from-threading)
+- [33. What is GIL in Python ?](#33-what-is-gil-in-python)
+- [34. How do you achieve true parallelism in Python despite the GIL ?](#34-how-do-you-achieve-true-parallelism-in-python-despite-the-gil)
 
 ---
 #### 1. When is Python a strong choice for a project, and when would you choose another language instead?
@@ -46,7 +50,6 @@ Python is a strong choice for projects that benefit from readability, fast devel
 </details>
 
 ---
-
 #### 2. What are the differences between a list, tuple, and set in Python? When would you choose one over the others?
 
 <details>
@@ -69,7 +72,6 @@ I would use a set when I need fast membership check or when I need to remove dup
 </details>
 
 ---
-
 #### 3. What is the difference between mutable and immutable types in Python? Give examples of each.
 
 <details>
@@ -80,7 +82,6 @@ A mutable object can be changed in place after it is created, like a `list`, `di
 </details>
 
 ---
-
 #### 4. What's the difference between `dict.get(key)` and `dict[key]`?
 
 <details>
@@ -103,7 +104,6 @@ On the other hand, `dict[key]` raises a KeyError if the key is missing.
 </details>
 
 ---
-
 #### 5. What's a comprehension in Python ?
 
 <details>
@@ -137,7 +137,6 @@ There is a comprehension for almost each type of collection: list, set, dict.
 </details>
 
 ---
-
 #### 6. What's the method `zip` for in Python ?
 
 <details>
@@ -170,40 +169,7 @@ new_dict = dict(zip(names, scores))
 </details>
 
 ---
-
-#### 7. What's `if __name__ == "__main__"` for ?
-
-<details>
-<summary>Reveal answer</summary>
-
-`__name__` is a variable managed by Python. When it runs a file directly, it sets this variable to `"__main__"` whereas when the same file is imported by another module, it sets this variable to the module's name.
-
-Thanks to this, we can know if the curent script was directly executed or is merely imported. 
-
-This is important because we don't want an imported module to execute code right away, we want it to merely expose methods that our code will then execute.
-
-</details>
-
----
-
-#### 8. What's the difference between a module, a package and a library ?
-
-<details>
-<summary>Reveal answer</summary>
-
-A module is a single Python file `.py`.
-
-A package is a folder containing several modules.
-
-Modules and packages have a concrete meaning linked to the file structure. On the other hand, a library is more conceptual.
-
-A library is a collection of reusable code designed to solve related problems. A library can be composed of one module, one package or several packages. The important part is that all of them provide functionnality around the same topic.
-
-</details>
-
----
-
-#### 9. What is the standard library in Python ?
+#### 7. What is the standard library in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -225,8 +191,64 @@ Many believe that the success of Python is partly due to this philosophy. Develo
 </details>
 
 ---
+#### 8. What's the difference between a module, a package and a library ?
 
-#### 10. What is the difference between a shallow copy and a deep copy?
+<details>
+<summary>Reveal answer</summary>
+
+A module is a single Python file `.py`.
+
+A package is a folder containing several modules.
+
+Modules and packages have a concrete meaning linked to the file structure. On the other hand, a library is more conceptual.
+
+A library is a collection of reusable code designed to solve related problems. A library can be composed of one module, one package or several packages. The important part is that all of them provide functionnality around the same topic.
+
+</details>
+
+---
+#### 9. What's `if __name__ == "__main__"` for ?
+
+<details>
+<summary>Reveal answer</summary>
+
+`__name__` is a variable managed by Python. When it runs a file directly, it sets this variable to `"__main__"` whereas when the same file is imported by another module, it sets this variable to the module's name.
+
+Thanks to this, we can know if the curent script was directly executed or is merely imported. 
+
+This is important because we don't want an imported module to execute code right away, we want it to merely expose methods that our code will then execute.
+
+</details>
+
+---
+#### 10. How Python executes code ?
+
+<details>
+<summary>Reveal answer</summary>
+
+1. The Python interpreter reads the source file.
+2. It parses the source code into a tree.
+3. The tree is compiled into bytecode — an intermediate version of the code between Python and machine code.
+4. The bytecode is executed by the Python Virtual Machine, which is part of the interpreter.
+
+</details>
+
+---
+#### 11. How Python manages memory ?
+
+<details>
+<summary>Reveal answer</summary>
+
+To store runtime data, Python uses two data structures: the heap and the call stack.
+
+The heap stores all Python objects such as lists, dictionaries, strings, class instances, etc.
+
+The call stack stores the stack frames used to execute functions. Those stack frames contain everything needed to execute the function. It's also used to store local variable references even though they reference objects stored in the heap.
+
+</details>
+
+---
+#### 12. What is the difference between a shallow copy and a deep copy?
 
 <details>
 <summary>Reveal answer</summary>
@@ -255,8 +277,108 @@ print(a["user"]["age"]) // returns 10
 </details>
 
 ---
+#### 13. What is the difference between args and kwargs? Write a function that accepts both and prints them.
 
-#### 11. What's the different types of attributes in a class ?
+<details>
+<summary>Reveal answer</summary>
+
+To understand args and kwards, you must first understand positional and keyword arguments.
+
+A positional argument is an argument passed based on its order in the function call.
+
+A keyword argument is an argument passed based on the parameter name.
+
+```python
+def print_info(name, age):
+    print(f'name : {name}, age : {age}')
+
+print_info('fake_name', 20)
+print_info(name='fake_name', age=20)
+```
+
+In Python, keywords arguments can only be placed after positional arguments.
+
+Ok so what about *args and **kwargs ? Both are ways to retrieve additional parameters given to a function.
+
+The difference is that args collects additional positional parameters in a tuple whereas kwargs collects additional keyword parameters in a dictionary.
+
+The names args and kwargs are conventions. What really matters are the symbols * and **.
+
+```python
+def print_args(*args, **kwargs):
+    for arg in args:
+        print(arg)
+    
+    for key, value in kwargs.items():
+        print(value)
+```
+
+</details>
+
+---
+#### 14. What does `**some_dict` do in Python?
+
+<details>
+<summary>Reveal answer</summary>
+
+The syntax `**some_dict` unpacks a dictionary by keys.
+
+There are two main use cases for this syntax.
+
+First, to pass the key/value pairs of a dict as keyword arguments - `func(**some_dict)`. In that situation, the dictionary keys must match the parameter names. 
+
+```python
+func(**{"name": "Alice", "age": 30})
+# same as:
+func(name="Alice", age=30)
+```
+
+Second, to unpack a dictionary into another dictionary.
+
+```python
+data = {"name": "Alice", **{"age": 30}}
+# {"name": "Alice", "age": 30}
+```
+</details>
+
+---
+#### 15. What is the difference between `else` and `finally` in a `try` statement?
+
+<details>
+<summary>Reveal answer</summary>
+
+The `finally` block runs no matter what: whether the `try` block succeeds, raises an exception that is caught, or raises an exception that is not caught. It is usually used for cleanup, like closing files or releasing resources.
+
+The `else` block runs only if the `try` block completes successfully without raising an exception. It is useful for code that should run only when no error occurred.
+
+</details>
+
+---
+#### 16. How do you handle errors properly in Python code?
+
+<details>
+<summary>Reveal answer</summary>
+
+I would put only the code that can fail inside the `try` block, then catch specific exceptions that I know how to handle. I would avoid a bare `except` because it can hide real bugs. In the `except` block, I would log the error, retry, use a fallback, or re-raise the exception depending on the situation. I would use `finally` for cleanup that must run whether the operation succeeds or fails.
+
+</details>
+
+---
+#### 17. When would you define a custom exception class?
+
+<details>
+<summary>Reveal answer</summary>
+
+A good practice is to define a custom exception when your application has a domain-specific error that you want to identify or handle separately.
+
+You could raise a built-in exception for domain-specific errors - for example raise a ValueError for an invalid payment. It's not optimal though because many scenarios could lead to a ValueError exception and it could come from many places.
+
+Whereas, if you define your own Exception - like InvalidPaymentError - you know right away what kind of error occurred and you can handle them separately.
+
+</details>
+
+---
+#### 18. What's the different types of attributes in a class ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -317,8 +439,7 @@ print(tesla.counter)  # 2
 </details>
 
 ---
-
-#### 12. What's the difference between inheritance and composition ?
+#### 19. What's the difference between inheritance and composition ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -349,87 +470,7 @@ class UserService:
 </details>
 
 ---
-
-#### 13. When would you define a custom exception class?
-
-<details>
-<summary>Reveal answer</summary>
-
-A good practice is to define a custom exception when your application has a domain-specific error that you want to identify or handle separately.
-
-You could raise a built-in exception for domain-specific errors - for example raise a ValueError for an invalid payment. It's not optimal though because many scenarios could lead to a ValueError exception and it could come from many places.
-
-Whereas, if you define your own Exception - like InvalidPaymentError - you know right away what kind of error occurred and you can handle them separately.
-
-</details>
-
----
-
-#### 14. What is the difference between `else` and `finally` in a `try` statement?
-
-<details>
-<summary>Reveal answer</summary>
-
-The `finally` block runs no matter what: whether the `try` block succeeds, raises an exception that is caught, or raises an exception that is not caught. It is usually used for cleanup, like closing files or releasing resources.
-
-The `else` block runs only if the `try` block completes successfully without raising an exception. It is useful for code that should run only when no error occurred.
-
-</details>
-
----
-
-#### 15. How do you handle errors properly in Python code?
-
-<details>
-<summary>Reveal answer</summary>
-
-I would put only the code that can fail inside the `try` block, then catch specific exceptions that I know how to handle. I would avoid a bare `except` because it can hide real bugs. In the `except` block, I would log the error, retry, use a fallback, or re-raise the exception depending on the situation. I would use `finally` for cleanup that must run whether the operation succeeds or fails.
-
-</details>
-
----
-
-#### 16. What is the difference between args and kwargs? Write a function that accepts both and prints them.
-
-<details>
-<summary>Reveal answer</summary>
-
-To understand args and kwards, you must first understand positional and keyword arguments.
-
-A positional argument is an argument passed based on its order in the function call.
-
-A keyword argument is an argument passed based on the parameter name.
-
-```python
-def print_info(name, age):
-    print(f'name : {name}, age : {age}')
-
-print_info('fake_name', 20)
-print_info(name='fake_name', age=20)
-```
-
-In Python, keywords arguments can only be placed after positional arguments.
-
-Ok so what about *args and **kwargs ? Both are ways to retrieve additional parameters given to a function.
-
-The difference is that args collects additional positional parameters in a tuple whereas kwargs collects additional keyword parameters in a dictionary.
-
-The names args and kwargs are conventions. What really matters are the symbols * and **.
-
-```python
-def print_args(*args, **kwargs):
-    for arg in args:
-        print(arg)
-    
-    for key, value in kwargs.items():
-        print(value)
-```
-
-</details>
-
----
-
-#### 17. Explain the difference between @staticmethod and @classmethod. When would you use each?
+#### 20. Explain the difference between @staticmethod and @classmethod. When would you use each?
 
 <details>
 <summary>Reveal answer</summary>
@@ -466,8 +507,70 @@ A static method is a normal method which is put inside a class because it logica
 </details>
 
 ---
+#### 21. What are `__repr__` and `__str__`?
 
-#### 18. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.
+<details>
+<summary>Reveal answer</summary>
+
+`__str__` and `__repr__` are special methods used to represent an object as a string. `__str__` is meant to be human-friendly, for display to users. `__repr__` is meant to be more precise and developer-friendly, useful for debugging. Ideally, `repr(obj)` returns something that could recreate the object, but when that is not practical it should at least be unambiguous.
+
+</details>
+
+---
+#### 22. What's a decorator in Python ?
+
+<details>
+<summary>Reveal answer</summary>
+
+A decorator is a function that takes another function as input and returns a new function, usually a wrapper. It lets us add behavior around the original function without changing its internal code. Common use cases include validating parameters, logging, measuring execution time, caching results, authentication, or rate limiting.
+
+</details>
+
+---
+#### 23. What are type hints used for? Are they enforced at runtime?
+
+<details>
+<summary>Reveal answer</summary>
+
+Type hints are used to annotate python code with expected types. They're not enforced at runtime by Python which means they won't raise an error if a type is incorrect during the execution. However, type checkers and IDEs can use them to catch mistakes earlier. They also improve readibility, maintainability and allow auto-completion during development.
+
+</details>
+
+---
+#### 24. What are dataclasses?
+
+<details>
+<summary>Reveal answer</summary>
+
+Dataclasses are Python classes with the decorator `@dataclass`. This decorator tells Python to automatically generate methods like `__init__`, `__repr__`, and `__eq__` based on the fields of the class. It's a way to reduce boilerplate code on simple classes. This decorator was designed for classes where the important part is their fields (and not really their methods) - thus the name data classes.
+
+```python
+@dataclass
+class Point:
+    x: int
+    y: int
+```
+
+</details>
+
+---
+#### 25. What is the difference between iterator and iterable?
+
+<details>
+<summary>Reveal answer</summary>
+
+An iterator is an object that has a `__next__` method. It's the concept used to go through each value of a collection. You can see an iterator as a cursor that walks through the values one by one.
+
+An iterable is an object that has a `__iter__` method. It's basically a source of data you can ask to start giving you values.
+
+For example, a list is an iterable but not an iterator. 
+
+In most everyday code, you don't manipulate iterators directly; Python does it under the hood. When you call `for x in iterable`, what's actually happening is that Python gets the iterator from the iterable and uses it to give you the values.
+
+</details>
+
+---
+#### 26. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.
 
 <details>
 <summary>Reveal answer</summary>
@@ -526,8 +629,7 @@ This structure has one trade-off though which is that you can only iterate over 
 </details>
 
 ---
-
-#### 19. What's a fixture in Pytest ?
+#### 27. What's a fixture in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -543,8 +645,7 @@ When you declare a fixture, you basically say "here's how to create the resource
 </details>
 
 ---
-
-#### 20. What's parametrization in Pytest ?
+#### 28. What's parametrization in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -558,8 +659,7 @@ In Pytest, you use a decoration called `@pytest.mark.parametrize`.
 </details>
 
 ---
-
-#### 21. What's the different between fixtures and parametrized test in Pytest ?
+#### 29. What's the different between fixtures and parametrized test in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -581,8 +681,7 @@ It's important because it explains why a parametrized decoractor accepts only pl
 </details>
 
 ---
-
-#### 22. What's Pydantic ?
+#### 30. What's Pydantic ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -598,19 +697,7 @@ Those two are separated because they can evolve independently - you might want t
 </details>
 
 ---
-
-#### 23. What's a decorator in Python ?
-
-<details>
-<summary>Reveal answer</summary>
-
-A decorator is a function that takes another function as input and returns a new function, usually a wrapper. It lets us add behavior around the original function without changing its internal code. Common use cases include validating parameters, logging, measuring execution time, caching results, authentication, or rate limiting.
-
-</details>
-
----
-
-#### 24. How would you store and validate a JSON schema for API results in Python ?
+#### 31. How would you store and validate a JSON schema for API results in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -620,8 +707,7 @@ I would define a JSON schema to describe the expected result and validate incomi
 </details>
 
 ---
-
-#### 25. Explain Python's `asyncio`. How does `async/await` differ from threading?
+#### 32. Explain Python's `asyncio`. How does `async/await` differ from threading?
 
 <details>
 <summary>Reveal answer</summary>
@@ -693,8 +779,7 @@ When to use multi-threading over asyncio ? For blocking code. For instance, the 
 </details>
 
 ---
-
-#### 26. What is GIL in Python ?
+#### 33. What is GIL in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -712,98 +797,12 @@ Others implementations of Python like Jython don't have this limitation but come
 </details>
 
 ---
-
-#### 27. How do you achieve true parallelism in Python despite the GIL ?
+#### 34. How do you achieve true parallelism in Python despite the GIL ?
 
 <details>
 <summary>Reveal answer</summary>
 
 If you use CPython, you can obtain true parallelism onmy if you use separate CPython interpreter. In practice, it means using different processes (and not just threads) as each one of them would have its own CPython interpreter and its own GIL.
-
-</details>
-
----
-
-#### 28. What does `**some_dict` do in Python?
-
-<details>
-<summary>Reveal answer</summary>
-
-The syntax `**some_dict` unpacks a dictionary by keys.
-
-There are two main use cases for this syntax.
-
-First, to pass the key/value pairs of a dict as keyword arguments - `func(**some_dict)`. In that situation, the dictionary keys must match the parameter names. 
-
-```python
-func(**{"name": "Alice", "age": 30})
-# same as:
-func(name="Alice", age=30)
-```
-
-Second, to unpack a dictionary into another dictionary.
-
-```python
-data = {"name": "Alice", **{"age": 30}}
-# {"name": "Alice", "age": 30}
-```
-</details>
-
-
----
-
-#### 29. What is the difference between iterator and iterable?
-
-<details>
-<summary>Reveal answer</summary>
-
-An iterator is an object that has a `__next__` method. It's the concept used to go through each value of a collection. You can see an iterator as a cursor that walks through the values one by one.
-
-An iterable is an object that has a `__iter__` method. It's basically a source of data you can ask to start giving you values.
-
-For example, a list is an iterable but not an iterator. 
-
-In most everyday code, you don't manipulate iterators directly; Python does it under the hood. When you call `for x in iterable`, what's actually happening is that Python gets the iterator from the iterable and uses it to give you the values.
-
-</details>
-
----
-
-#### 30. What are `__repr__` and `__str__`?
-
-<details>
-<summary>Reveal answer</summary>
-
-`__str__` and `__repr__` are special methods used to represent an object as a string. `__str__` is meant to be human-friendly, for display to users. `__repr__` is meant to be more precise and developer-friendly, useful for debugging. Ideally, `repr(obj)` returns something that could recreate the object, but when that is not practical it should at least be unambiguous.
-
-</details>
-
----
-
-#### 31. What are dataclasses?
-
-<details>
-<summary>Reveal answer</summary>
-
-Dataclasses are Python classes with the decorator `@dataclass`. This decorator tells Python to automatically generate methods like `__init__`, `__repr__`, and `__eq__` based on the fields of the class. It's a way to reduce boilerplate code on simple classes. This decorator was designed for classes where the important part is their fields (and not really their methods) - thus the name data classes.
-
-```python
-@dataclass
-class Point:
-    x: int
-    y: int
-```
-
-</details>
-
----
-
-#### 32. What are type hints used for? Are they enforced at runtime?
-
-<details>
-<summary>Reveal answer</summary>
-
-Type hints are used to annotate python code with expected types. They're not enforced at runtime by Python which means they won't raise an error if a type is incorrect during the execution. However, type checkers and IDEs can use them to catch mistakes earlier. They also improve readibility, maintainability and allow auto-completion during development.
 
 </details>
 
