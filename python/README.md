@@ -24,20 +24,21 @@ Questions are ordered from **easiest to hardest**.
 - [18. What's the different types of attributes in a class ?](#18-whats-the-different-types-of-attributes-in-a-class)
 - [19. What's the difference between inheritance and composition ?](#19-whats-the-difference-between-inheritance-and-composition)
 - [20. Explain the difference between @staticmethod and @classmethod. When would you use each?](#20-explain-the-difference-between-staticmethod-and-classmethod-when-would-you-use-each)
-- [21. What are `__repr__` and `__str__`?](#21-what-are-repr-and-str)
-- [22. What's a decorator in Python ?](#22-whats-a-decorator-in-python)
-- [23. What are type hints used for? Are they enforced at runtime?](#23-what-are-type-hints-used-for-are-they-enforced-at-runtime)
-- [24. What are dataclasses?](#24-what-are-dataclasses)
-- [25. What is the difference between iterator and iterable?](#25-what-is-the-difference-between-iterator-and-iterable)
-- [26. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.](#26-what-is-a-python-generator-write-a-one-liner-generator-that-yields-squares-of-numbers-from-1-to-n)
-- [27. What's a fixture in Pytest ?](#27-whats-a-fixture-in-pytest)
-- [28. What's parametrization in Pytest ?](#28-whats-parametrization-in-pytest)
-- [29. What's the different between fixtures and parametrized test in Pytest ?](#29-whats-the-different-between-fixtures-and-parametrized-test-in-pytest)
-- [30. What's Pydantic ?](#30-whats-pydantic)
-- [31. How would you store and validate a JSON schema for API results in Python ?](#31-how-would-you-store-and-validate-a-json-schema-for-api-results-in-python)
-- [32. Explain Python's `asyncio`. How does `async/await` differ from threading?](#32-explain-pythons-asyncio-how-does-asyncawait-differ-from-threading)
-- [33. What is GIL in Python ?](#33-what-is-gil-in-python)
-- [34. How do you achieve true parallelism in Python despite the GIL ?](#34-how-do-you-achieve-true-parallelism-in-python-despite-the-gil)
+- [21. What happens if you define a function in a class without passing the parameter `self` and without using the decorators `staticmethod` or `classmethod` ?](#21-what-happens-if-you-define-a-function-in-a-class-without-passing-the-parameter-self-and-without-using-the-decorators-staticmethod-or-classmethod)
+- [22. What are `__repr__` and `__str__`?](#22-what-are-repr-and-str)
+- [23. What's a decorator in Python ?](#23-whats-a-decorator-in-python)
+- [24. What are type hints used for? Are they enforced at runtime?](#24-what-are-type-hints-used-for-are-they-enforced-at-runtime)
+- [25. What are dataclasses?](#25-what-are-dataclasses)
+- [26. What is the difference between iterator and iterable?](#26-what-is-the-difference-between-iterator-and-iterable)
+- [27. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.](#27-what-is-a-python-generator-write-a-one-liner-generator-that-yields-squares-of-numbers-from-1-to-n)
+- [28. What's a fixture in Pytest ?](#28-whats-a-fixture-in-pytest)
+- [29. What's parametrization in Pytest ?](#29-whats-parametrization-in-pytest)
+- [30. What's the different between fixtures and parametrized test in Pytest ?](#30-whats-the-different-between-fixtures-and-parametrized-test-in-pytest)
+- [31. What's Pydantic ?](#31-whats-pydantic)
+- [32. How would you store and validate a JSON schema for API results in Python ?](#32-how-would-you-store-and-validate-a-json-schema-for-api-results-in-python)
+- [33. Explain Python's `asyncio`. How does `async/await` differ from threading?](#33-explain-pythons-asyncio-how-does-asyncawait-differ-from-threading)
+- [34. What is GIL in Python ?](#34-what-is-gil-in-python)
+- [35. How do you achieve true parallelism in Python despite the GIL ?](#35-how-do-you-achieve-true-parallelism-in-python-despite-the-gil)
 
 ---
 #### 1. When is Python a strong choice for a project, and when would you choose another language instead?
@@ -507,7 +508,17 @@ A static method is a normal method which is put inside a class because it logica
 </details>
 
 ---
-#### 21. What are `__repr__` and `__str__`?
+#### 21. What happens if you define a function in a class without passing the parameter `self` and without using the decorators `staticmethod` or `classmethod` and then, you call it on an instance?
+
+<details>
+<summary>Reveal answer</summary>
+
+By default, a function defined in a class without any decorator is considered as an instance method. Which means that Python will try to pass it the parameter `self`. If the function does not accept this parameter, it will return a `TypeError`.
+
+</details>
+
+---
+#### 22. What are `__repr__` and `__str__`?
 
 <details>
 <summary>Reveal answer</summary>
@@ -517,7 +528,7 @@ A static method is a normal method which is put inside a class because it logica
 </details>
 
 ---
-#### 22. What's a decorator in Python ?
+#### 23. What's a decorator in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -527,7 +538,7 @@ A decorator is a function that takes another function as input and returns a new
 </details>
 
 ---
-#### 23. What are type hints used for? Are they enforced at runtime?
+#### 24. What are type hints used for? Are they enforced at runtime?
 
 <details>
 <summary>Reveal answer</summary>
@@ -537,7 +548,7 @@ Type hints are used to annotate python code with expected types. They're not enf
 </details>
 
 ---
-#### 24. What are dataclasses?
+#### 25. What are dataclasses?
 
 <details>
 <summary>Reveal answer</summary>
@@ -554,7 +565,7 @@ class Point:
 </details>
 
 ---
-#### 25. What is the difference between iterator and iterable?
+#### 26. What is the difference between iterator and iterable?
 
 <details>
 <summary>Reveal answer</summary>
@@ -570,7 +581,7 @@ In most everyday code, you don't manipulate iterators directly; Python does it u
 </details>
 
 ---
-#### 26. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.
+#### 27. What is a Python generator? Write a one-liner generator that yields squares of numbers from 1 to n.
 
 <details>
 <summary>Reveal answer</summary>
@@ -629,7 +640,7 @@ This structure has one trade-off though which is that you can only iterate over 
 </details>
 
 ---
-#### 27. What's a fixture in Pytest ?
+#### 28. What's a fixture in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -645,7 +656,7 @@ When you declare a fixture, you basically say "here's how to create the resource
 </details>
 
 ---
-#### 28. What's parametrization in Pytest ?
+#### 29. What's parametrization in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -659,7 +670,7 @@ In Pytest, you use a decoration called `@pytest.mark.parametrize`.
 </details>
 
 ---
-#### 29. What's the different between fixtures and parametrized test in Pytest ?
+#### 30. What's the different between fixtures and parametrized test in Pytest ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -681,7 +692,7 @@ It's important because it explains why a parametrized decoractor accepts only pl
 </details>
 
 ---
-#### 30. What's Pydantic ?
+#### 31. What's Pydantic ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -697,7 +708,7 @@ Those two are separated because they can evolve independently - you might want t
 </details>
 
 ---
-#### 31. How would you store and validate a JSON schema for API results in Python ?
+#### 32. How would you store and validate a JSON schema for API results in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -707,7 +718,7 @@ I would define a JSON schema to describe the expected result and validate incomi
 </details>
 
 ---
-#### 32. Explain Python's `asyncio`. How does `async/await` differ from threading?
+#### 33. Explain Python's `asyncio`. How does `async/await` differ from threading?
 
 <details>
 <summary>Reveal answer</summary>
@@ -779,7 +790,7 @@ When to use multi-threading over asyncio ? For blocking code. For instance, the 
 </details>
 
 ---
-#### 33. What is GIL in Python ?
+#### 34. What is GIL in Python ?
 
 <details>
 <summary>Reveal answer</summary>
@@ -797,7 +808,7 @@ Others implementations of Python like Jython don't have this limitation but come
 </details>
 
 ---
-#### 34. How do you achieve true parallelism in Python despite the GIL ?
+#### 35. How do you achieve true parallelism in Python despite the GIL ?
 
 <details>
 <summary>Reveal answer</summary>
