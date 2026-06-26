@@ -562,6 +562,22 @@ class Point:
     y: int
 ```
 
+You can make the instances of the class immutable by adding the parameter `@dataclass(frozen=True)`. This will ensure that any modifications on an instance will raise an exception.
+
+
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Frozen:
+    x: int
+    y: int
+
+p = Frozen(0, 0)
+p.x = 2
+# FrozenInstanceError: cannot assign to field 'x'
+```
+
 </details>
 
 ---

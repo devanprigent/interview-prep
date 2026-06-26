@@ -6,6 +6,7 @@
 - [2. What is the difference between a VM and a container?](#2-what-is-the-difference-between-a-vm-and-a-container)
 - [3. Imagine your code works locally, but fails in production. What are some possible reasons, and how would you investigate?](#3-imagine-your-code-works-locally-but-fails-in-production-what-are-some-possible-reasons-and-how-would-you-investigate)
 - [4. A bug only happens sometimes in production and you cannot reproduce it locally. What steps would you take to investigate? What extra logging or monitoring would help you without exposing sensitive data?](#4-a-bug-only-happens-sometimes-in-production-and-you-cannot-reproduce-it-locally-what-steps-would-you-take-to-investigate-what-extra-logging-or-monitoring-would-help-you-without-exposing-sensitive-data)
+- [5. What is the difference between WSGI and ASGI servers?](#5-what-is-the-difference-between-wsgi-and-asgi-servers)
 
 ---
 
@@ -64,5 +65,22 @@ I would first check the production error message, logs, and stack trace to under
 <summary>Reveal answer</summary>
 
 I would start by checking the stack trace and production logs around the failure. Then I would look for patterns: affected users, request payloads, timestamps, specific servers, database records, feature flags, or load spikes. If logs are not enough, I would add targeted logging with correlation/request IDs, but avoid logging secrets or personal data. I would also compare local and production configuration, dependency versions, database schema, environment variables, and external service behavior.
+
+</details>
+
+---
+
+#### 5. What is the difference between WSGI and ASGI servers?
+
+<details>
+<summary>Reveal answer</summary>
+
+WSGI (Web Server Gateway Interface) and ASGI (Asynchronous Server Gateway Interface) are both Python standards that define how a web server communicates with a Python web application. The main difference is that WSGI is synchronous, while ASGI is asynchronous.
+
+With WSGI, the server handles one request at a time per worker in a blocking way. The application receives an HTTP request, processes it, returns a response, and only then moves on to the next request. This model fits traditional synchronous frameworks like Flask or Django. Common WSGI servers include Gunicorn, uWSGI, and mod_wsgi.
+
+ASGI extends this model to support async code, long-lived connections, and protocols beyond plain HTTP request/response — such as WebSockets, HTTP/2, and server-sent events. An ASGI server can handle many concurrent connections on a single worker by awaiting I/O instead of blocking. This makes it a better fit for async frameworks like FastAPI or Starlette. Common ASGI servers include Uvicorn, Hypercorn, and Daphne.
+
+In practice, you choose based on your application: WSGI is simple and well suited to classic synchronous apps; ASGI is the right choice when you need async I/O or real-time features like WebSockets.
 
 </details>
