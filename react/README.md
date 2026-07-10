@@ -65,20 +65,52 @@ Lifting state up means moving a component's state from a component to its parent
 <details>
 <summary>Reveal answer</summary>
 
-A component is controlled when its important state is owned by a parent and passed to the component through props. It is uncontrolled when the component owns that state internally.
+When people talk about controlled vs uncontrolled components, they are imagining a situation where you have a component interacting directly with the DOM - like a form for instance. And they want to know: who is the source of truth of the data?
 
-A common example is form inputs.
+In a controlled component, the important variable is stored by the component in its React state. It's then merely passed to the DOM. The source of truth is the React state.
 
-A form input can be controlled, meaning its state is managed by the parent component:
+```javascript
+function LoginForm() {
+  const [email, setEmail] = useState("");
 
-```typescript
-<input value={email} onChange={...} />
+  return (
+    <input
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+  );
+}
 ```
 
-Or it can be uncontrolled, meaning the DOM manages the value itself and the parent component merely reads it when needed:
-```typescript
-<input defaultValue="test@example.com" ref={emailRef} />
+In an uncontrolled component, the important variable is stored in the DOM itself, all its changed are handled by the DOM and the component merely reads the result.
+
+```javascript
+function LoginForm() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = () => {
+    console.log(inputRef.current?.value);
+  };
+
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={handleSubmit}>Submit</button>
+    </>
+  );
+}
 ```
+
+TLDR:
+Controlled = React owns the state.
+Uncontrolled = the DOM owns the state.
+
+Why does it matter? Because it influences how much control the component has on the value and what it can do. With a controlled component, it always knows the current value and can modify it easily. With an uncontrolled component, React doesn't know the value until it reads it from the DOM and it has to modify the DOM directly if it wants to modify the value.
+
+That's important for validation. A controlled component can perform live validation, checking the value is correct at each change. Whereas for an uncontrolled component, it'll usually check it only on submission.
+
+Another preocuppation is the performance. Because a controlled component owns the value, it renders at every change - for instance every keystroke. It can be costly if you have hundreds of inputs updating simultaneously. In that case, we'd prefer an uncontrolled input (or a library using uncontrolled inputs) which track form values efficiently without forcing the entire form to re-render on every keystroke.
+
 
 </details>
 
