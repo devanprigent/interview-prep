@@ -16,6 +16,7 @@
 - [12. How do you avoid unnecessary re-renders?](#12-how-do-you-avoid-unnecessary-re-renders)
 - [13. How do you optimize rendering for a very long list in React?](#13-how-do-you-optimize-rendering-for-a-very-long-list-in-react)
 - [14. When memoization can be counter-productive ?](#14-when-memoization-can-be-counter-productive-)
+- [15. What should you put in the dependency array of React useEffect ?](#14-when-should-you-put-in-the-dependency-array-of-react-useffect)
 
 ---
 
@@ -268,4 +269,33 @@ If the calculation is cheap or if the component doesn't render often, the overhe
 
 Memoization should not be the default. It is useful when a calculation or component is expensive, when it re-renders frequently, or when a stable reference is needed to avoid re-rendering memoized children.
 
+</details>
+
+---
+
+#### 15. What should you put in the dependency array of React useEffect?
+
+<details>
+<summary>Reveal answer</summary>
+
+You can put any Javascript value in a `useEffect` dependency array.
+
+In practice, you should include every reactive value used by the effect that should trigger it to re-run when it changes.
+
+The issue with `useEffect` isn't the type of the dependency but how React determines whether it has changed.
+
+useEffect compares the dependencies to their previous values using Object.is.
+
+For primitive types, it compares by value.
+
+For complex types, it compares by reference.
+
+This doesn't mean you have to pass only primitive values in the dependency array.
+
+For example, it's perfectly reasonable to put a function in the dependency array if its reference is stable 
+(for example, because it's memoized with useCallback).
+
+But it means you should make sure your dependencies will trigger a re-run when you expect. If an array or object is
+created on every render, then its reference will change and it will trigger the useEffect - even when its actual
+value didn't change.
 </details>
