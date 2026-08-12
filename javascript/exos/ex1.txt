@@ -1,0 +1,13 @@
+// This code has a bug. Can you identify it ?
+
+async getPaymentSchedule(contract: Contract): Promise<PaymentSchedule> {
+    const payments = await this.invoicingService.getPayments(contract);
+    
+    const template = contract.paymentRecurrence === 'yearly'
+        ? this.yearlyPaymentScheduleTemplate
+        : this.monthlyPaymentScheduleTemplate;
+    
+    const { customer } = contract
+    
+    return template.generateDocument({ customer, payments });
+}
