@@ -9,9 +9,10 @@
 - [7. What's the difference between interface and type in TypeScript? Give a case where one is objectively more suitable than the other.](#7-whats-the-difference-between-interface-and-type-in-typescript-give-a-case-where-one-is-objectively-more-suitable-than-the-other)
 - [8. What's the difference between Promise.all, Promise.allSettled, and Promise.race? Give a use case for each.](#8-whats-the-difference-between-promiseall-promiseallsettled-and-promiserace-give-a-use-case-for-each)
 - [9. What happens if an async function throws an error but you forget the try/catch around its call? How would you properly handle the error?](#9-what-happens-if-an-async-function-throws-an-error-but-you-forget-the-trycatch-around-its-call-how-would-you-properly-handle-the-error)
-- [10. How does the event loop work in Node.js? What happens if you block the main thread with a heavy synchronous computation?](#10-how-does-the-event-loop-work-in-nodejs-what-happens-if-you-block-the-main-thread-with-a-heavy-synchronous-computation)
-- [11. How would you handle a background task (e.g., sending a confirmation email after subscribing) without blocking the HTTP response to the client?](#11-how-would-you-handle-a-background-task-eg-sending-a-confirmation-email-after-subscribing-without-blocking-the-http-response-to-the-client)
-- [12. You have a list of insurance coverages and need to quickly retrieve the ones applicable to a given profession. Which data structure would you choose and why (array, Set, Map, index)?](#12-you-have-a-list-of-insurance-coverages-and-need-to-quickly-retrieve-the-ones-applicable-to-a-given-profession-which-data-structure-would-you-choose-and-why-array-set-map-index)
+- [10. What are `window` and `document` in the browser?](#10-what-are-window-and-document-in-the-browser)
+- [11. How does the event loop work in Node.js? What happens if you block the main thread with a heavy synchronous computation?](#11-how-does-the-event-loop-work-in-nodejs-what-happens-if-you-block-the-main-thread-with-a-heavy-synchronous-computation)
+- [12. How would you handle a background task (e.g., sending a confirmation email after subscribing) without blocking the HTTP response to the client?](#12-how-would-you-handle-a-background-task-eg-sending-a-confirmation-email-after-subscribing-without-blocking-the-http-response-to-the-client)
+- [13. You have a list of insurance coverages and need to quickly retrieve the ones applicable to a given profession. Which data structure would you choose and why (array, Set, Map, index)?](#13-you-have-a-list-of-insurance-coverages-and-need-to-quickly-retrieve-the-ones-applicable-to-a-given-profession-which-data-structure-would-you-choose-and-why-array-set-map-index)
 
 ---
 #### 1. What is the difference between == and ===? Give an example of a comparison that would surprise you if you didn't know about type coercion.
@@ -138,7 +139,21 @@ TODO: short answer.
 </details>
 
 ---
-#### 10. How does the event loop work in Node.js? What happens if you block the main thread with a heavy synchronous computation?
+#### 10. What are `window` and `document` in the browser?
+
+<details>
+<summary>Reveal answer</summary>
+
+`window` is a massive global object accessible in the browser. All global functions and variables are properties of the window object. For instance, `console.log` comes from `window.console.log`.
+
+`document` is the entry point to the DOM i.e the HTML of the entire page represented as a Javascript object.
+
+The link between `window` and `document` is that `document` is a property : `window.document`.
+
+</details>
+
+---
+#### 11. How does the event loop work in Node.js? What happens if you block the main thread with a heavy synchronous computation?
 
 <details>
 <summary>Reveal answer</summary>
@@ -148,7 +163,7 @@ TODO: short answer.
 </details>
 
 ---
-#### 11. How would you handle a background task (e.g., sending a confirmation email after subscribing) without blocking the HTTP response to the client?
+#### 12. How would you handle a background task (e.g., sending a confirmation email after subscribing) without blocking the HTTP response to the client?
 
 <details>
 <summary>Reveal answer</summary>
@@ -158,7 +173,7 @@ TODO: short answer.
 </details>
 
 ---
-#### 12. You have a list of insurance coverages and need to quickly retrieve the ones applicable to a given profession. Which data structure would you choose and why (array, Set, Map, index)?
+#### 13. You have a list of insurance coverages and need to quickly retrieve the ones applicable to a given profession. Which data structure would you choose and why (array, Set, Map, index)?
 
 <details>
 <summary>Reveal answer</summary>
