@@ -84,7 +84,37 @@ The tricky part is that only functions are hoisted. However, because arrows func
 <details>
 <summary>Reveal answer</summary>
 
-TODO: short answer.
+We talk of closure when an inner function has access to the variables defined in an outer function.
+
+
+```javascript
+function outerFunction(a){
+    function innerFunction(b){
+        console.log(a,b);
+    }
+
+    return innerFunction
+}
+
+const myFunc = outerFunction(1);
+myFunc(2); // Returns 1,2
+```
+
+In this example, we could wonder whether `myFunc(2)` has access to the variable `a` because ``outerFunction`` is gone by the time you execute ``innerFunction``.
+
+That's the whole idea of closure: yes, `innerFunction` still has access to the variable `a`. The function has access to all its variables - called lexical environment - and to the lexical environements of all its parents functions, even if those functions have returned since.
+
+```javascript
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// 3, 3, 3  ← bug: all callbacks share the same `i`
+
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100);
+}
+// 0, 1, 2  ← each iteration gets its own `i`
+```
 
 </details>
 
@@ -94,7 +124,49 @@ TODO: short answer.
 <details>
 <summary>Reveal answer</summary>
 
-TODO: short answer.
+The concept of deep and shallow copy matters when talking about objects.
+
+When you perform a shallow copy of an object, Javascript will copy all the attributes of the object inside the new container.
+
+BUT it will copy different things based on the type of the property. For primitive types - string, number, boolean - Javascript will copy the value.
+
+```javascript
+const user = {name: "Alice", age: 25};
+const copy = {...user};
+copy.name = "Bob";
+console.log(user); // {name: Alice, age: 25}
+console.log(copy); // {name: Bob, age: 25}
+```
+
+In that case, we created a shallow copy, all the attributes were primitive types hence copied by value. Everything works fine.
+
+For complex types - array, object - however, Javascript will copy the reference to the object, and not the value.
+
+```javascript
+const user = {name: "Alice", age: 25, data: {city: "Paris", number: 19}};
+const copy = {...user};
+copy.data.number = 20;
+console.log(user); // {name: Alice, age: 25, data: {city: "Paris", number: 20}}
+console.log(copy); // {name: Alice, age: 25, data: {city: "Paris", number: 20}}
+```
+
+That's when issues arise. Here, we are unvolontarily modifying the original object.
+
+The issue is that the copy holds the reference to the same nested object. Both copy and original are pointing to the same nested object, if one modifies it, the other will see the change.
+
+It can lead to tricky bug where you think you are modifying a local copy, whereas you're actually alterating the original data.
+
+In order to create a completely independent copy, you need to make a deep copy.
+
+A deep copy recursively copies nested objects too, so no shared references remain.
+
+```javascript
+const user = {name: "Alice", age: 25, data: {city: "Paris", number: 19}};
+const copy = structuredClone(user);
+copy.data.number = 20;
+console.log(user); // {name: Alice, age: 25, data: {city: "Paris", number: 19}}
+console.log(copy); // {name: Alice, age: 25, data: {city: "Paris", number: 20}}
+```
 
 </details>
 
@@ -104,8 +176,34 @@ TODO: short answer.
 <details>
 <summary>Reveal answer</summary>
 
-TODO: short answer.
+It's easy to confuse Map and dictionary objects in Javascript because they both can be used to store key-value data.
 
+```javacript
+const map = new Map();
+map.set("a", 1);
+map.set("b", 2);
+map.set("c", 3);
+
+const dict = {a:1, b:2, c:3}
+```
+
+Historically, the only way to create a hash map was to use a plain object. But later, it was decided to add this new `Map` structure to cover some of the limitation of the object.
+
+First, `Map` accepts any type of keys. You can use string, number, objects, etc, as a key. On the other hand, a plain object accepts only string as keys.
+
+Second, `Map` is iterable directly whereas a plain object is not. It's still possible to iterate over the elements of an object but you first need to transform it into an iterable data structure which costs memory.
+
+```javascript
+const map = new Map();
+map.set("a", 1);
+map.set("b", 2);
+map.set("c", 3);
+
+map.forEach((value, key) => console.log(value, key));
+
+const dict = {a:1, b:2, c:3}
+Object.entries(dict).forEach(([key, value]) => console.log(key, value));
+```
 </details>
 
 ---
@@ -114,7 +212,17 @@ TODO: short answer.
 <details>
 <summary>Reveal answer</summary>
 
-TODO: short answer.
+They're basically the same, most of the time you can choose either of them.
+
+The only major difference is that if you have multiple interfaces with the same name, they'll merge into one. It's common when augmenting a library.
+
+```javascript
+interface User { name: string }
+interface User { age: number }
+// → User has both name and age
+```
+
+This is not possible with types and would return an error. You would need to use union or advanced composition for that.
 
 </details>
 

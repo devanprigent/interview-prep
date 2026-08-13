@@ -1,4 +1,4 @@
-// This code has a bug. Can you identify it ?
+// There is a bug waiting to happen in that code. Identify it and propose a better approach.
 
 async getPaymentSchedule(contract: Contract): Promise<PaymentSchedule> {
     const payments = await this.invoicingService.getPayments(contract);
@@ -7,7 +7,47 @@ async getPaymentSchedule(contract: Contract): Promise<PaymentSchedule> {
         ? this.yearlyPaymentScheduleTemplate
         : this.monthlyPaymentScheduleTemplate;
     
-    const { customer } = contract
+    const { customer } = contract;
     
     return template.generateDocument({ customer, payments });
 }
+
+
+/*
+SOLUTION
+
+
+This code implicitely assumes that the paymentRecurrence is either 'yearly' or 'monthly'.
+
+But what happens if we decide to add a new type of payment like 'quaterly'?
+
+If the concept of payment recurrence appears several times in the code, it would be easy to forget 
+
+to update that specific part of the code. Hence creating a bug where we use the monthly template
+
+for a different recurrence.
+
+The solution is to use an approach that would raise an error if we add a new value for 
+
+`paymentRecurrence` without updating this code.
+
+For instance: 
+
+
+private templates: Record<PaymentRecurrence, PaymentScheduleTemplate> = {
+    yearly: new YearlyPaymentScheduleTemplate(),
+    monthly: new MonthlyPaymentScheduleTemplate(),
+}
+
+async getPaymentSchedule(contract: Contract): Promise<PaymentSchedule> {
+    const payments = await this.invoicingService.getPayments(contract);
+    
+    const template = this.templates[contract.paymentRecurrence];
+    
+    const { customer } = contract;
+    
+    return template.generateDocument({ customer, payments });
+}
+
+
+*/
