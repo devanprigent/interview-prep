@@ -1,0 +1,71 @@
+Question:
+
+Tu dois créer une API qui permet de récupérer les commandes d’un utilisateur. Comment tu organiserais ça ?
+
+Follow-up:
+
+- et si on veut filtrer par date ?
+- où mets-tu la validation ?
+- que renvoies-tu si l’utilisateur n’existe pas ?
+- et si la base de données est indisponible ?
+
+Solution:
+
+Je commencerais par définir une table dans la base de données pour stocker les
+commandes.
+
+Les entrées devraient être de la forme:
+{
+    user_id: "xxxx",
+    timestamp: "2026-08-16",
+    product_id: "xxxx",
+    quantity: 2
+}
+
+avec une clé étrangère pour product_id qui pointe vers une table produit et une 
+clé étrangère pour username qui pointe vers une table users.
+
+Ensuite, je définirais un endpoint pour remplir cette base de données:
+POST /users/<user_id>/orders
+
+Cet endpoint devrait être accessible uniquement aux utilisateurs authorisés.
+
+J'utiliserais un mécanisme d'authentification comme un token JWT. Probablement
+
+avec des cookies pour le transport (au lieu d'utiliser un stockage comme session ou
+
+local pour éviter les XSS) et avec un double-submit pattern pour se protéger des CSRF.
+
+Pour visualiser les données:
+GET /users/<user_id>/orders
+GET /users/<user_id>/orders/<id>
+
+Si on veut filtrer par date on utiliserait:
+
+GET /users/<user_id>/orders?fromDate=12-05-2026&toDate=14-05-2026
+
+Je mets la validation du body côté serveur, mais on peut aussi ajouter un formulaire
+
+yup avec un schéma pour faire une prévalidation côté frontend.
+
+Lors de la validation, on vérifie si les clés étrangères existent et si non on envoie
+
+un message d'erreur du genre "Utilisateur introuvable : <user_id>" avec un code HTTP 404.
+
+Si la base de données est indisponible on renvoit un 500 Internal Server Error.
+
+
+
+
+-----
+REPONSE CONDENSEE
+
+Je créerais une ressource orders liée à un utilisateur. Les endpoints seraient GET /users/:userId/orders, GET /users/:userId/orders/:orderId et POST /users/:userId/orders.
+
+Pour le filtrage par date, j'utiliserais des query parameters comme ?fromDate=2026-05-12&toDate=2026-05-14.
+
+La validation se fait d'abord côté serveur : présence des champs obligatoires, format des dates, quantité positive et existence de l'utilisateur et du produit. Le frontend peut faire une prévalidation pour améliorer l'expérience utilisateur, mais la validation serveur reste la référence.
+
+Si l'utilisateur n'existe pas, je renvoie 404 Not Found. S'il existe mais n'a aucune commande, je renvoie 200 OK avec un tableau vide.
+
+Enfin, si la base de données est indisponible, je renvoie 500 Internal Server Error, je logge l'erreur côté serveur et je n'expose pas les détails techniques au client.

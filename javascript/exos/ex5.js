@@ -5,7 +5,7 @@ async function notifyUsers(userIds) {
       await sendEmail(id);
     });
     console.log("All emails sent");
-  }
+}
 
 /*
 SOLUTION
